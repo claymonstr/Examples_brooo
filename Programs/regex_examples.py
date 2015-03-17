@@ -33,20 +33,29 @@ nextPos = myStr.find(',', pos)
 micRula = myStr[pos:nextPos]
 nextPos += 1
 
-# Now we'll need to use rfind() because even though
-# we're string searching via the
+# Now we could keep using find(), but let's not be
+# so stupid. Use rfind() because even though
+# we're string searching via the "being an idiot"
+# method, but we can be a little bit less of one.
 
 # rfind(string, [beg, end]) - works similarly, but returns
 # index from the right side. Still returns -1 if it can't
 # find what you're looking for.
 # beg and end are optional arguments.
-pos = myStr.rfind(',')
-print pos
+finPos = myStr.rfind(',')
+whatDo = myStr[finPos + 1:]
+
+
+preFinPos = myStr.rfind(',', 0, finPos)
+wantTrip = myStr[preFinPos + 1:finPos]
+
+oldWhat = myStr[nextPos:preFinPos]
+
+
 
 # And so on...as you can see this is a pain
 # perhaps an even better example to see why this
-# is painful can be shown here. Say we want only
-# the part of the string that says "the old schoola"
+# is painful can be shown here.
 
 # IMPORTANT REGULAR EXPRESSION INFO
 # regex = regular expression
@@ -54,7 +63,7 @@ print pos
 # "not being an idiot" string searching
 
 # Beginning regex example
-##HisName = re.search('^(\\w+),', myStr)
+HisName = re.findall(r'(.*?)[,\.]', myStr)
+print HisName
 
-##WhatHeDo = re.search(r'')
 
